@@ -29,7 +29,6 @@
             z-index: 0;
         }
 
-        /* GİRİŞ EKRANI */
         #music-overlay {
             position: fixed;
             top: 0;
@@ -87,7 +86,6 @@
             transform: scale(1.03);
         }
 
-        /* SAMİMİ İÇERİK KUTUSU */
         .container {
             text-align: center;
             z-index: 10;
@@ -127,7 +125,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* UÇUŞAN FOTOĞRAFLAR */
         .particle {
             position: absolute;
             pointer-events: none;
@@ -176,8 +173,10 @@
     </div>
 
     <script>
-        // Hızlıresim üzerinden doğrudan görsel bağlantısını çektik
-        const directPhotoLink = "https://hizliresim.com";
+        // Hızlıresim engelini aşmak için proxy köprüsü eklendi
+        const proxyUrl = "https://weserv.nl";
+        const targetPhoto = "://hizliresim.com";
+        const finalPhotoUrl = proxyUrl + targetPhoto;
 
         function startSurprise() {
             const overlay = document.getElementById('music-overlay');
@@ -199,7 +198,7 @@
             const particle = document.createElement('div');
             particle.classList.add('particle');
             
-            particle.style.backgroundImage = `url('${directPhotoLink}')`;
+            particle.style.backgroundImage = `url('${finalPhotoUrl}')`;
             particle.style.left = Math.random() * 85 + "vw";
             particle.style.animationDuration = Math.random() * 2 + 5 + "s";
             
