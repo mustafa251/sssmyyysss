@@ -19,7 +19,6 @@
             position: relative;
         }
 
-        /* Arka plan siber ay-yıldız neon efekti */
         .bg-neon-sign {
             position: absolute;
             font-size: 20rem;
@@ -31,7 +30,7 @@
             animation: pulseSign 4s infinite alternate;
         }
 
-        /* AŞIRI İLGİ ÇEKİCİ GİRİŞ EKRANI */
+        /* CAFCAFLI NEON GİRİŞ EKRANI */
         #music-overlay {
             position: fixed;
             top: 0;
@@ -47,7 +46,6 @@
             transition: all 1s cubic-bezier(0.74, 0.03, 0.17, 0.96);
         }
 
-        /* Pulsar Çember Efekti */
         .neon-circle {
             position: absolute;
             width: 280px;
@@ -70,7 +68,6 @@
             padding: 0 20px;
         }
 
-        /* Ultra Parlak Siber Buton */
         .play-btn {
             background: transparent;
             color: #fff;
@@ -143,14 +140,22 @@
             letter-spacing: 0.5px;
         }
 
-        /* Uçuşan Neon Parçacıklar */
+        /* UÇUŞAN KÜÇÜK RESİMLERİNİZ */
         .particle {
             position: absolute;
             pointer-events: none;
-            bottom: -50px;
+            bottom: -80px;
             animation: floatUp 7s infinite linear;
             opacity: 0;
-            z-index: 1;
+            z-index: 2;
+            width: 55px;
+            height: 70px;
+            background-image: url('https://squarespace-cdn.com');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(255, 26, 26, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         @keyframes rotateCircle {
@@ -169,10 +174,10 @@
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg) scale(0.7); opacity: 0; }
             15% { opacity: 0.6; }
             85% { opacity: 0.6; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(-115vh) rotate(360deg) scale(1.1); opacity: 0; }
         }
     </style>
 </head>
@@ -180,17 +185,14 @@
 
     <div class="bg-neon-sign">🇹🇷</div>
 
-    <!-- İlgi Çekici İlk Ekran -->
     <div id="music-overlay">
         <div class="neon-circle"></div>
-        <p class="overlay-title">Senin İçin Zamanda Küçük Bir Sürpriz...</p>
+        <p class="overlay-title">Senin İçin Küçük Bir Sürpriz...</p>
         <button class="play-btn" onclick="startSurprise()">BAŞLAT ✨</button>
     </div>
 
-    <!-- Fon Müziği -->
     <iframe id="bg-music" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
 
-    <!-- Ana İçerik -->
     <div class="container" id="main-content">
         <p>Baktığım her yerde, düşündüğüm her güzel detayda bir şekilde aklıma gelmeyi başarıyorsun.</p>
         <p>Hayatımda başladığın bu tatlı iz, her geçen gün çok daha anlamlı ve özel bir yere dönüşüyor.</p>
@@ -202,38 +204,25 @@
         function startSurprise() {
             const overlay = document.getElementById('music-overlay');
             overlay.style.opacity = '0';
-            overlay.style.transform = 'translateY(-100vh)'; // Ekran yukarı kayarak kaybolur
+            overlay.style.transform = 'translateY(-100vh)';
             setTimeout(() => overlay.remove(), 1000);
 
-            // Romantik Fon Müziği
             const music = document.getElementById('bg-music');
             music.src = "https://youtube.com";
 
-            // İçerik kutusunu zarifçe büyüterek getir
             setTimeout(() => {
                 document.getElementById('main-content').classList.add('show');
             }, 500);
 
-            // Parçacıkları ve neon sembolleri fırlat
-            setInterval(createParticle, 250);
+            setInterval(createParticle, 500);
         }
 
         function createParticle() {
             const particle = document.createElement('div');
             particle.classList.add('particle');
             
-            // Rastgele Ay-Yıldız veya Parıltı seçimi
-            const items = ['✨', '🌙', '⭐', '❤️'];
-            particle.innerText = items[Math.floor(Math.random() * items.length)];
-            
-            // Rastgele boyut ve hızlar
-            const size = Math.random() * 1.2 + 0.8;
-            particle.style.fontSize = size + "rem";
-            particle.style.left = Math.random() * 90 + "vw";
+            particle.style.left = Math.random() * 85 + "vw";
             particle.style.animationDuration = Math.random() * 3 + 5 + "s";
-            
-            // Hafif siber parıltı efekti
-            particle.style.textShadow = "0 0 10px rgba(255, 51, 51, 0.8)";
             
             document.body.appendChild(particle);
             setTimeout(() => particle.remove(), 7000);
