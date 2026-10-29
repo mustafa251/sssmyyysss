@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Küçük Bir Sürpriz... 🕊️</title>
+    <title>Sadece Senin İçin... ✨</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle at center, #800000 0%, #330000 50%, #0d0000 100%);
+            background: radial-gradient(circle at center, #2b0000 0%, #0a0000 70%, #000000 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -19,148 +19,178 @@
             position: relative;
         }
 
-        body::before {
-            content: "🇹🇷";
+        /* Arka plan siber ay-yıldız neon efekti */
+        .bg-neon-sign {
             position: absolute;
-            font-size: 25rem;
-            opacity: 0.04;
+            font-size: 20rem;
+            opacity: 0.03;
+            filter: drop-shadow(0 0 50px #ff0000);
             pointer-events: none;
             user-select: none;
             z-index: 0;
+            animation: pulseSign 4s infinite alternate;
         }
 
-        /* Cafcaflı ve Animasyonlu Giriş Ekranı */
+        /* AŞIRI İLGİ ÇEKİCİ GİRİŞ EKRANI */
         #music-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #1f0000, #0a0000);
+            background: #050000;
             z-index: 100;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: all 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: all 1s cubic-bezier(0.74, 0.03, 0.17, 0.96);
+        }
+
+        /* Pulsar Çember Efekti */
+        .neon-circle {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border: 2px dashed rgba(255, 26, 26, 0.3);
+            border-radius: 50%;
+            animation: rotateCircle 15s linear infinite;
         }
 
         .overlay-title {
-            font-size: 1.6rem;
-            margin-bottom: 30px;
+            font-size: 1.4rem;
+            margin-bottom: 40px;
             font-weight: 300;
-            letter-spacing: 2px;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-            animation: pulseText 2s infinite alternate;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #ff4d4d;
+            text-shadow: 0 0 15px rgba(255, 77, 77, 0.7);
+            z-index: 102;
+            text-align: center;
+            padding: 0 20px;
         }
 
+        /* Ultra Parlak Siber Buton */
         .play-btn {
-            background: linear-gradient(45deg, #ff1a1a, #990000);
-            color: white;
-            border: none;
-            padding: 18px 45px;
-            font-size: 1.3rem;
-            font-weight: 600;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #ff1a1a;
+            padding: 20px 50px;
+            font-size: 1.4rem;
+            font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 30px rgba(255, 26, 26, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            z-index: 102;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #ff1a1a;
+            box-shadow: 0 0 20px rgba(255, 26, 26, 0.4), inset 0 0 15px rgba(255, 26, 26, 0.3);
+            transition: all 0.3s ease;
+            animation: neonPulse 1.5s infinite alternate;
         }
 
         .play-btn:hover {
-            transform: scale(1.08) translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255, 26, 26, 0.7);
+            background: #ff1a1a;
+            color: #000;
+            box-shadow: 0 0 45px #ff1a1a, 0 0 70px #ff1a1a;
+            text-shadow: none;
+            transform: scale(1.05);
         }
 
-        /* Ana İçerik Kutusu */
+        /* ANA SÜRPRİZ KUTUSU */
         .container {
             text-align: center;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.75);
-            padding: 40px 30px;
-            border-radius: 24px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 77, 77, 0.2);
-            max-width: 450px;
+            background: rgba(10, 0, 0, 0.8);
+            padding: 50px 35px;
+            border-radius: 28px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 26, 26, 0.15);
+            border: 1px solid rgba(255, 26, 26, 0.25);
+            max-width: 440px;
             width: 85%;
             opacity: 0;
-            transform: scale(0.9) translateY(30px);
-            transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+            transform: scale(0.85);
+            transition: all 1.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         .container.show {
             opacity: 1;
-            transform: scale(1) translateY(0);
+            transform: scale(1);
         }
 
         h1 {
-            font-size: 2.1rem;
-            margin-bottom: 20px;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
             color: #ff4d4d;
             text-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
         }
 
         p {
-            font-size: 1.15rem;
-            line-height: 1.7;
+            font-size: 1.2rem;
+            line-height: 1.8;
             color: #e5e5e5;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            font-weight: 300;
         }
 
         .highlight {
             font-weight: bold;
-            color: #ff3333;
-            font-size: 1.5rem;
+            color: #ff2222;
+            font-size: 1.6rem;
             display: block;
-            margin-top: 25px;
-            text-shadow: 0 0 20px rgba(255, 51, 51, 0.8);
+            margin-top: 30px;
+            text-shadow: 0 0 25px rgba(255, 34, 34, 0.8);
+            letter-spacing: 0.5px;
         }
 
-        /* Uçuşan Küçük Fotoğrafların Stili */
-        .floating-photo {
+        /* Uçuşan Neon Parçacıklar */
+        .particle {
             position: absolute;
-            background-image: url('https://allorigins.win');
-            background-size: cover;
-            background-position: center;
-            border-radius: 12px;
             pointer-events: none;
-            bottom: -80px;
-            animation: floatUpAndRotate 8s infinite linear;
+            bottom: -50px;
+            animation: floatUp 7s infinite linear;
             opacity: 0;
-            z-index: 2;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.2);
+            z-index: 1;
         }
 
-        @keyframes pulseText {
-            0% { text-shadow: 0 0 10px rgba(255,255,255,0.2); opacity: 0.8; }
-            100% { text-shadow: 0 0 25px rgba(255, 77, 77, 0.6); opacity: 1; }
+        @keyframes rotateCircle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        @keyframes floatUpAndRotate {
-            0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
-            10% { opacity: 0.5; }
-            80% { opacity: 0.5; }
-            100% { transform: translateY(-115vh) rotate(360deg) scale(1); opacity: 0; }
+        @keyframes neonPulse {
+            0% { box-shadow: 0 0 15px rgba(255, 26, 26, 0.4), inset 0 0 10px rgba(255, 26, 26, 0.2); }
+            100% { box-shadow: 0 0 30px rgba(255, 26, 26, 0.8), inset 0 0 20px rgba(255, 26, 26, 0.5); transform: scale(0.98); }
+        }
+
+        @keyframes pulseSign {
+            0% { opacity: 0.02; transform: scale(1); }
+            100% { opacity: 0.05; transform: scale(1.05); }
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.6; }
+            85% { opacity: 0.6; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- İlk Cafcaflı Giriş Ekranı -->
+    <div class="bg-neon-sign">🇹🇷</div>
+
+    <!-- İlgi Çekici İlk Ekran -->
     <div id="music-overlay">
-        <p class="overlay-title">Senin için küçük bir sürpriz...</p>
-        <button class="play-btn" onclick="startSurprise()">Tıkla ve Keşfet ✨</button>
+        <div class="neon-circle"></div>
+        <p class="overlay-title">Senin İçin Zamanda Küçük Bir Sürpriz...</p>
+        <button class="play-btn" onclick="startSurprise()">BAŞLAT ✨</button>
     </div>
 
     <!-- Fon Müziği -->
     <iframe id="bg-music" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
 
-    <!-- Ana Yazı Alanı -->
+    <!-- Ana İçerik -->
     <div class="container" id="main-content">
         <p>Baktığım her yerde, düşündüğüm her güzel detayda bir şekilde aklıma gelmeyi başarıyorsun.</p>
         <p>Hayatımda başladığın bu tatlı iz, her geçen gün çok daha anlamlı ve özel bir yere dönüşüyor.</p>
@@ -172,40 +202,41 @@
         function startSurprise() {
             const overlay = document.getElementById('music-overlay');
             overlay.style.opacity = '0';
-            overlay.style.transform = 'scale(1.1)';
-            setTimeout(() => overlay.remove(), 1200);
+            overlay.style.transform = 'translateY(-100vh)'; // Ekran yukarı kayarak kaybolur
+            setTimeout(() => overlay.remove(), 1000);
 
-            // Romantik fon müziği
+            // Romantik Fon Müziği
             const music = document.getElementById('bg-music');
             music.src = "https://youtube.com";
 
-            // Yumuşak büyüme animasyonuyla ana metni getir
+            // İçerik kutusunu zarifçe büyüterek getir
             setTimeout(() => {
                 document.getElementById('main-content').classList.add('show');
-            }, 600);
+            }, 500);
 
-            // Fotoğrafları uçurmaya başla
-            setInterval(createFloatingPhoto, 600);
+            // Parçacıkları ve neon sembolleri fırlat
+            setInterval(createParticle, 250);
         }
 
-        function createFloatingPhoto() {
-            const photo = document.createElement('div');
-            photo.classList.add('floating-photo');
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
             
-            // Rastgele genişlik ve yükseklik vererek fotoğrafın oranını koruyoruz
-            const size = Math.random() * 30 + 45; // 45px ile 75px arası küçük şık boyutlar
-            photo.style.width = size + "px";
-            photo.style.height = (size * 1.3) + "px"; // Fotoğrafın dikey oranına göre ayarlandı
+            // Rastgele Ay-Yıldız veya Parıltı seçimi
+            const items = ['✨', '🌙', '⭐', '❤️'];
+            particle.innerText = items[Math.floor(Math.random() * items.length)];
             
-            photo.style.left = Math.random() * 90 + "vw";
-            photo.style.animationDuration = Math.random() * 3 + 6 + "s"; // Süratleri farklı olsun
+            // Rastgele boyut ve hızlar
+            const size = Math.random() * 1.2 + 0.8;
+            particle.style.fontSize = size + "rem";
+            particle.style.left = Math.random() * 90 + "vw";
+            particle.style.animationDuration = Math.random() * 3 + 5 + "s";
             
-            document.body.appendChild(photo);
+            // Hafif siber parıltı efekti
+            particle.style.textShadow = "0 0 10px rgba(255, 51, 51, 0.8)";
             
-            // Ekrandan çıkınca temizle
-            setTimeout(() => {
-                photo.remove();
-            }, 8000);
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 7000);
         }
     </script>
 </body>
