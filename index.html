@@ -8,7 +8,6 @@
         body {
             margin: 0;
             padding: 0;
-            /* Arka plan için estetik ve derinlikli bir Türk bayrağı çizim dokusu oluşturuldu */
             background: radial-gradient(circle at center, #800000 0%, #330000 50%, #0d0000 100%);
             height: 100vh;
             display: flex;
@@ -20,7 +19,6 @@
             position: relative;
         }
 
-        /* Arka plana minimal ay-yıldız çizim silueti yerleştirme */
         body::before {
             content: "🇹🇷";
             position: absolute;
@@ -31,71 +29,85 @@
             z-index: 0;
         }
 
-        /* Müzik Başlatma Ekranı */
+        /* Cafcaflı ve Animasyonlu Giriş Ekranı */
         #music-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #1a0000;
+            background: linear-gradient(135deg, #1f0000, #0a0000);
             z-index: 100;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease;
+            transition: all 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .overlay-title {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            animation: pulseText 2s infinite alternate;
         }
 
         .play-btn {
-            background: #cc2222;
+            background: linear-gradient(45deg, #ff1a1a, #990000);
             color: white;
             border: none;
-            padding: 15px 35px;
-            font-size: 1.2rem;
-            border-radius: 30px;
+            padding: 18px 45px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(204, 34, 34, 0.6);
-            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 0 30px rgba(255, 26, 26, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .play-btn:hover {
-            transform: scale(1.05);
-            background: #e62222;
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 26, 26, 0.7);
         }
 
+        /* Ana İçerik Kutusu */
         .container {
             text-align: center;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             padding: 40px 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 77, 77, 0.2);
             max-width: 450px;
             width: 85%;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 1.8s ease;
+            transform: scale(0.9) translateY(30px);
+            transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         .container.show {
             opacity: 1;
-            transform: translateY(0);
+            transform: scale(1) translateY(0);
         }
 
         h1 {
             font-size: 2.1rem;
             margin-bottom: 20px;
             color: #ff4d4d;
-            text-shadow: 0 0 10px rgba(255, 77, 77, 0.4);
+            text-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
         }
 
         p {
             font-size: 1.15rem;
             line-height: 1.7;
-            color: #e0e0e0;
+            color: #e5e5e5;
             margin-bottom: 15px;
         }
 
@@ -105,81 +117,95 @@
             font-size: 1.5rem;
             display: block;
             margin-top: 25px;
-            text-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+            text-shadow: 0 0 20px rgba(255, 51, 51, 0.8);
         }
 
-        /* Küçük Parıltı Efektleri */
-        .sparkle {
+        /* Uçuşan Küçük Fotoğrafların Stili */
+        .floating-photo {
             position: absolute;
-            background: #fff;
-            border-radius: 50%;
+            background-image: url('https://allorigins.win');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
             pointer-events: none;
-            bottom: -10px;
-            animation: floatUp 7s infinite linear;
-            opacity: 0.3;
-            z-index: 1;
+            bottom: -80px;
+            animation: floatUpAndRotate 8s infinite linear;
+            opacity: 0;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
-            100% { transform: translateY(-105vh); opacity: 0; }
+        @keyframes pulseText {
+            0% { text-shadow: 0 0 10px rgba(255,255,255,0.2); opacity: 0.8; }
+            100% { text-shadow: 0 0 25px rgba(255, 77, 77, 0.6); opacity: 1; }
+        }
+
+        @keyframes floatUpAndRotate {
+            0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
+            10% { opacity: 0.5; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(-115vh) rotate(360deg) scale(1); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Giriş Ekranı -->
+    <!-- İlk Cafcaflı Giriş Ekranı -->
     <div id="music-overlay">
-        <p style="font-size: 1.3rem; margin-bottom: 20px; font-weight: 300; letter-spacing: 1px;">Senin için küçük bir şey bıraktım...</p>
-        <button class="play-btn" onclick="startSurprise()">Tıkla ve Aç 🎵</button>
+        <p class="overlay-title">Senin için küçük bir sürpriz...</p>
+        <button class="play-btn" onclick="startSurprise()">Tıkla ve Keşfet ✨</button>
     </div>
 
-    <!-- Fon Müziği (Duygusal Piyano) -->
+    <!-- Fon Müziği -->
     <iframe id="bg-music" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
 
+    <!-- Ana Yazı Alanı -->
     <div class="container" id="main-content">
         <p>Baktığım her yerde, düşündüğüm her güzel detayda bir şekilde aklıma gelmeyi başarıyorsun.</p>
         <p>Hayatımda başladığın bu tatlı iz, her geçen gün çok daha anlamlı ve özel bir yere dönüşüyor.</p>
         <h1>İyi ki varsın,</h1>
-        <span class="highlight">Kalbimdeki cumhuriyet sensin! ❤️</span>
+        <span class="highlight">çünkü kalbimdeki cumhuriyet sensin! ❤️</span>
     </div>
 
     <script>
         function startSurprise() {
             const overlay = document.getElementById('music-overlay');
             overlay.style.opacity = '0';
-            setTimeout(() => overlay.remove(), 1000);
+            overlay.style.transform = 'scale(1.1)';
+            setTimeout(() => overlay.remove(), 1200);
 
-            // Müzik açılışı
+            // Romantik fon müziği
             const music = document.getElementById('bg-music');
             music.src = "https://youtube.com";
 
-            // Metin animasyonu
+            // Yumuşak büyüme animasyonuyla ana metni getir
             setTimeout(() => {
                 document.getElementById('main-content').classList.add('show');
-            }, 400);
+            }, 600);
 
-            // Arka planda yumuşak ışık parıltıları uçurma
-            setInterval(createSparkle, 200);
+            // Fotoğrafları uçurmaya başla
+            setInterval(createFloatingPhoto, 600);
         }
 
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            sparkle.style.left = Math.random() * 100 + "vw";
-            sparkle.style.animationDuration = Math.random() * 3 + 5 + "s";
+        function createFloatingPhoto() {
+            const photo = document.createElement('div');
+            photo.classList.add('floating-photo');
             
-            const size = Math.random() * 4 + 3;
-            sparkle.style.width = size + "px";
-            sparkle.style.height = size + "px";
-            if(Math.random() > 0.5) {
-                sparkle.style.background = "#ff4d4d"; // Bazı parıltılar kırmızı tonlarında
-            }
+            // Rastgele genişlik ve yükseklik vererek fotoğrafın oranını koruyoruz
+            const size = Math.random() * 30 + 45; // 45px ile 75px arası küçük şık boyutlar
+            photo.style.width = size + "px";
+            photo.style.height = (size * 1.3) + "px"; // Fotoğrafın dikey oranına göre ayarlandı
             
-            document.body.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 7000);
+            photo.style.left = Math.random() * 90 + "vw";
+            photo.style.animationDuration = Math.random() * 3 + 6 + "s"; // Süratleri farklı olsun
+            
+            document.body.appendChild(photo);
+            
+            // Ekrandan çıkınca temizle
+            setTimeout(() => {
+                photo.remove();
+            }, 8000);
         }
     </script>
 </body>
