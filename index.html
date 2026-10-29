@@ -29,6 +29,7 @@
             z-index: 0;
         }
 
+        /* GİRİŞ EKRANI */
         #music-overlay {
             position: fixed;
             top: 0;
@@ -86,6 +87,7 @@
             transform: scale(1.03);
         }
 
+        /* SAMİMİ İÇERİK KUTUSU */
         .container {
             text-align: center;
             z-index: 10;
@@ -164,7 +166,10 @@
         <button class="play-btn" onclick="startSurprise()">Aç bakalım ✨</button>
     </div>
 
-    <iframe id="bg-music" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
+    <!-- Güvenli MP3 Ses Dosyası -->
+    <audio id="bg-music" loop>
+        <source src="https://soundhelix.com" type="audio/mpeg">
+    </audio>
 
     <div class="container" id="main-content">
         <p>Hani bazı anlar olur ya, durup dururken aklına gelir birisi ve yüzünde küçük bir tebessüm belirir... İşte sen bende tam olarak o detaysın.</p>
@@ -173,10 +178,8 @@
     </div>
 
     <script>
-        // Hızlıresim engelini aşmak için proxy köprüsü eklendi
-        const proxyUrl = "https://weserv.nl";
-        const targetPhoto = "://hizliresim.com";
-        const finalPhotoUrl = proxyUrl + targetPhoto;
+        // Her yerde açılabilen sorunsuz fotoğraf kaynağı
+        const finalPhotoUrl = "https://squarespace-cdn.com";
 
         function startSurprise() {
             const overlay = document.getElementById('music-overlay');
@@ -184,8 +187,10 @@
             overlay.style.transform = 'translateY(-100vh)';
             setTimeout(() => overlay.remove(), 900);
 
+            // Ses dosyasını güvenli tarayıcı yöntemiyle tetikleme
             const music = document.getElementById('bg-music');
-            music.src = "https://youtube.com";
+            music.volume = 0.6; // Ses seviyesi %60
+            music.play().catch(error => console.log("Müzik otomatik başlatılamadı:", error));
 
             setTimeout(() => {
                 document.getElementById('main-content').classList.add('show');
