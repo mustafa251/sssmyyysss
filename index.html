@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadece Senin İçin... 🕊️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* Arka plana fotoğrafınızı eklemek için aşağıdaki URL kısmına fotoğraf linkini yapıştırabilirsin */
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(77, 0, 0, 0.6)), url('https://hizliresim.com/rrjfbnbn') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        /* Müzik Başlatma Ekranı */
+        #music-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a0000;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease;
+        }
+
+        .play-btn {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 77, 77, 0.6);
+            transition: transform 0.2s;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.55);
+            padding: 40px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px 0 rgba(228, 15, 15, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 450px;
+            width: 85%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 2s ease;
+        }
+
+        .container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            margin-bottom: 20px;
+            color: #ff4d4d;
+            text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #f5f5f5;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #ff3333;
+            font-size: 1.6rem;
+            display: block;
+            margin-top: 25px;
+            text-shadow: 0 0 15px rgba(255, 51, 51, 0.7);
+        }
+
+        /* Kalp Efektleri */
+        .heart {
+            position: absolute;
+            background-color: #ff3333;
+            display: inline-block;
+            height: 10px;
+            margin: 0 10px;
+            transform: rotate(-45deg);
+            width: 10px;
+            bottom: -20px;
+            animation: floatUp 6s infinite linear;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        .heart:before, .heart:after {
+            content: "";
+            background-color: #ff3333;
+            border-radius: 50%;
+            height: 10px;
+            position: absolute;
+            width: 10px;
+        }
+
+        .heart:before { top: -5px; left: 0; }
+        .heart:after { top: 0; left: 5px; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(-45deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-105vh) rotate(-45deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Giriş Ekranı (Müzik İzni İçin) -->
+    <div id="music-overlay">
+        <p style="font-size: 1.4rem; margin-bottom: 20px;">Senin için bir sürprizim var...</p>
+        <button class="play-btn" onclick="startSurprise()">Tıkla ve Aç 🎵</button>
+    </div>
+
+    <!-- Youtube Arka Plan Müziği (İstersen sondaki v= kısmından başka şarkı kodu koyabilirsin) -->
+    <iframe id="bg-music" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
+
+    <div class="container" id="main-content">
+        <p>Zamanı ve mekanı unuttuğum, baktığım her yerde sadece seni bulduğum bir hayattayım artık.</p>
+        <p>Sen benim sığındığım en güvenli liman, her sabah uyandığım en güzel gökyüzüsün.</p>
+        <h1>İyi ki varsın sevgilim...</h1>
+        <span class="highlight">Çünkü kalbimdeki cumhuriyet sensin! ❤️</span>
+    </div>
+
+    <script>
+        function startSurprise() {
+            // Giriş ekranını gizle
+            const overlay = document.getElementById('music-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.remove(), 1000);
+
+            // Müziği başlat (Temsili olarak romantik bir piyano fon müziği ekli)
+            const music = document.getElementById('bg-music');
+            music.src = "https://youtube.com";
+
+            // Ana yazıyı göster
+            setTimeout(() => {
+                document.getElementById('main-content').classList.add('show');
+            }, 500);
+
+            // Kalpleri uçurmaya başla
+            setInterval(createHeart, 250);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+            
+            const size = Math.random() * 12 + 10;
+            heart.style.width = size + "px";
+            heart.style.height = size + "px";
+            
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+    </script>
+</body>
+</html>
