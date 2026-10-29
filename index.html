@@ -19,7 +19,6 @@
             position: relative;
         }
 
-        /* Arka plan gizli ay-yıldız detayı */
         .bg-neon-sign {
             position: absolute;
             font-size: 22rem;
@@ -50,7 +49,7 @@
             position: absolute;
             width: 260px;
             height: 260px;
-            border: 1px dashed rgba(255, 51, 51, 0.2);
+            border: 1px dashed rgba(255, 51, 51, 0.25);
             border-radius: 50%;
             animation: rotateCircle 20s linear infinite;
         }
@@ -88,7 +87,7 @@
             transform: scale(1.03);
         }
 
-        /* MÜZİK KUTUSU */
+        /* SAMİMİ İÇERİK KUTUSU */
         .container {
             text-align: center;
             z-index: 10;
@@ -128,23 +127,21 @@
             letter-spacing: 0.5px;
         }
 
-        /* KÜÇÜK UÇUŞAN FOTOĞRAFINIZ (BASE64) */
+        /* UÇUŞAN FOTOĞRAFLAR */
         .particle {
             position: absolute;
             pointer-events: none;
-            bottom: -90px;
+            bottom: -95px;
             animation: floatUp 6.5s infinite linear;
             opacity: 0;
             z-index: 2;
-            width: 60px;
-            height: 80px;
-            /* Fotoğrafınız doğrudan kodun içine gömüldü, hatasız yüklenecektir */
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://w3.org" width="60" height="80" viewBox="0 0 60 80"><rect width="100%" height="100%" fill="%23220000"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="30">✨</text></svg>');
+            width: 65px;
+            height: 85px;
             background-size: cover;
             background-position: center;
-            border-radius: 6px;
-            box-shadow: 0 0 10px rgba(255, 51, 51, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(255, 51, 51, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         @keyframes rotateCircle {
@@ -179,8 +176,8 @@
     </div>
 
     <script>
-        // Gönderdiğin orijinal fotoğrafı buraya doğrudan entegre ettim
-        const myRealPhoto = "https://squarespace-cdn.com";
+        // Hızlıresim üzerinden doğrudan görsel bağlantısını çektik
+        const directPhotoLink = "https://hizliresim.com";
 
         function startSurprise() {
             const overlay = document.getElementById('music-overlay');
@@ -202,8 +199,7 @@
             const particle = document.createElement('div');
             particle.classList.add('particle');
             
-            // Kodun içine resmi inject ediyoruz
-            particle.style.backgroundImage = `url('${myRealPhoto}')`;
+            particle.style.backgroundImage = `url('${directPhotoLink}')`;
             particle.style.left = Math.random() * 85 + "vw";
             particle.style.animationDuration = Math.random() * 2 + 5 + "s";
             
