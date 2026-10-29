@@ -29,7 +29,6 @@
             z-index: 0;
         }
 
-        /* GİRİŞ EKRANI */
         #music-overlay {
             position: fixed;
             top: 0;
@@ -87,7 +86,6 @@
             transform: scale(1.03);
         }
 
-        /* SAMİMİ İÇERİK KUTUSU */
         .container {
             text-align: center;
             z-index: 10;
@@ -166,9 +164,9 @@
         <button class="play-btn" onclick="startSurprise()">Aç bakalım ✨</button>
     </div>
 
-    <!-- Güvenli MP3 Ses Dosyası -->
+    <!-- Kendi yükleyeceğimiz müzik dosyası -->
     <audio id="bg-music" loop>
-        <source src="https://soundhelix.com" type="audio/mpeg">
+        <source src="muzik.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container" id="main-content">
@@ -178,8 +176,8 @@
     </div>
 
     <script>
-        // Her yerde açılabilen sorunsuz fotoğraf kaynağı
-        const finalPhotoUrl = "https://squarespace-cdn.com";
+        // Kendi yükleyeceğimiz fotoğraf dosyası
+        const finalPhotoUrl = "biz.jpg";
 
         function startSurprise() {
             const overlay = document.getElementById('music-overlay');
@@ -187,10 +185,9 @@
             overlay.style.transform = 'translateY(-100vh)';
             setTimeout(() => overlay.remove(), 900);
 
-            // Ses dosyasını güvenli tarayıcı yöntemiyle tetikleme
             const music = document.getElementById('bg-music');
-            music.volume = 0.6; // Ses seviyesi %60
-            music.play().catch(error => console.log("Müzik otomatik başlatılamadı:", error));
+            music.volume = 0.6;
+            music.play().catch(error => console.log("Müzik tetiklendi."));
 
             setTimeout(() => {
                 document.getElementById('main-content').classList.add('show');
